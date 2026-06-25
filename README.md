@@ -58,4 +58,4 @@ O `package_name` no arquivo deve ser exatamente o mesmo do app:
 
 Como o site fica em uma subpasta (`/rugosidade-eixos/`), todos os caminhos do
 projeto são **relativos** (`./arquivo`) para funcionar corretamente. Não use
-caminhos que comecem com `/` (barra), pois apontariam para a raiz do domínio.
+caminhos que comecem com `/` (barra), pois apontariam para a raiz do domínio. TESTE
