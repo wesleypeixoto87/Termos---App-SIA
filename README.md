@@ -1,84 +1,61 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Política de Privacidade — Rugosidade Eixos</title>
-<style>
-  :root{ --navy:#0d1b2a; --green:#21c08b; --ice:#eef4f9; --mute:#5b6b7c; }
-  *{ box-sizing:border-box; }
-  body{
-    margin:0; font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-    background:var(--ice); color:#16242f; line-height:1.65;
-  }
-  header{
-    background:var(--navy); color:#fff; padding:40px 24px;
-  }
-  .wrap{ max-width:780px; margin:0 auto; }
-  header h1{ margin:0 0 6px; font-size:1.7rem; }
-  header p{ margin:0; color:#9fb3c6; font-size:.95rem; }
-  .accent{ color:var(--green); }
-  main{ padding:36px 24px 60px; }
-  h2{ color:var(--navy); font-size:1.15rem; margin:30px 0 8px; border-left:4px solid var(--green); padding-left:10px; }
-  a{ color:#127a59; }
-  .card{
-    background:#fff; border:1px solid #d7e1ea; border-radius:12px;
-    padding:22px 26px; box-shadow:0 1px 3px rgba(13,27,42,.06);
-  }
-  footer{ text-align:center; color:var(--mute); font-size:.82rem; padding:24px; }
-  .muted{ color:var(--mute); font-size:.9rem; }
-</style>
-</head>
-<body>
-<header>
-  <div class="wrap">
-    <h1>Política de Privacidade <span class="accent">·</span> Rugosidade Eixos</h1>
-    <p>Treinamento: Rugosidade &amp; Acabamento Superficial — Eixos Comando</p>
-  </div>
-</header>
+# Rugosidade Eixos — Site + PWA
 
-<main class="wrap">
-  <div class="card">
-    <p class="muted">Última atualização: junho de 2026</p>
+Site de treinamento técnico em rugosidade e acabamento superficial de eixos comando.
+Hospedado via **GitHub Pages**. © 2026 Wesley Peixoto.
 
-    <p>O aplicativo <strong>Rugosidade Eixos</strong> ("o aplicativo") é uma ferramenta
-    de treinamento técnico desenvolvida por <strong>Wesley Peixoto</strong>. Esta política
-    descreve como o aplicativo lida com informações.</p>
+---
 
-    <h2>Coleta de dados</h2>
-    <p>O aplicativo <strong>não coleta, armazena nem compartilha</strong> dados pessoais
-    dos usuários. Todo o conteúdo de treinamento funciona localmente no dispositivo,
-    inclusive sem conexão com a internet.</p>
+## Como publicar no GitHub Pages
 
-    <h2>Informações pessoais</h2>
-    <p>O aplicativo não solicita cadastro, login, nome, e-mail, localização, contatos
-    ou qualquer outra informação pessoal identificável.</p>
+1. Crie um repositório **público** (ex.: `rugosidade-eixos`).
+2. Suba **todo o conteúdo desta pasta** (Add file → Upload files → arraste tudo,
+   inclusive a pasta `.well-known`). Commit changes.
+3. Vá em **Settings → Pages**.
+4. Em *Source*, escolha **Deploy from a branch** → branch **main** → pasta **/ (root)** → Save.
+5. Aguarde 1–2 minutos. A URL aparece no topo da página, no formato:
+   `https://SEU-USUARIO.github.io/rugosidade-eixos/`
 
-    <h2>Permissões</h2>
-    <p>O aplicativo não requer permissões sensíveis do dispositivo (como câmera,
-    microfone, localização ou armazenamento pessoal) para seu funcionamento.</p>
+## URLs que você vai usar
 
-    <h2>Dados de uso e análise</h2>
-    <p>O aplicativo não utiliza ferramentas de rastreamento, análise de comportamento
-    ou publicidade. Nenhum dado de uso é transmitido a servidores externos pelo autor.</p>
+- **Site do app:**
+  `https://SEU-USUARIO.github.io/rugosidade-eixos/`
 
-    <h2>Conteúdo de terceiros</h2>
-    <p>Caso o aplicativo seja distribuído pela Google Play, a própria loja pode coletar
-    informações conforme suas políticas. Consulte a
-    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Política de Privacidade do Google</a>.</p>
+- **Política de privacidade** (cole no Play Console):
+  `https://SEU-USUARIO.github.io/rugosidade-eixos/politica-privacidade.html`
 
-    <h2>Alterações nesta política</h2>
-    <p>Esta política pode ser atualizada periodicamente. Recomenda-se revisá-la de
-    tempos em tempos. Alterações relevantes serão refletidas nesta página.</p>
+- **assetlinks.json** (verificação do app):
+  `https://SEU-USUARIO.github.io/rugosidade-eixos/.well-known/assetlinks.json`
 
-    <h2>Contato</h2>
-    <p>Em caso de dúvidas sobre esta política, entre em contato com o autor,
-    Wesley Peixoto, pelo canal de distribuição do treinamento.</p>
-  </div>
-</main>
+---
 
-<footer>
-  © 2026 Wesley Peixoto · Todos os direitos reservados.
-</footer>
-</body>
-</html>
+## IMPORTANTE: arquivo .well-known/assetlinks.json
+
+Esse arquivo faz o app abrir em **tela cheia** (sem a barra do navegador).
+Ele precisa da impressão digital **SHA-256** da chave que assinou seu `.aab`.
+
+### Onde pegar o SHA-256
+
+Como você gerou o `.aab` pelo PWA Builder e ativou o **Play App Signing**:
+
+1. No **Play Console** → seu app → **Testes e versões → Configuração → Integridade do app**
+   (ou *Setup → App integrity*).
+2. Procure **"Assinatura de apps do Google Play"** (App signing key certificate).
+3. Copie o valor de **SHA-256 certificate fingerprint** (formato `AA:BB:CC:...`).
+4. Abra o arquivo `.well-known/assetlinks.json`, substitua
+   `SUBSTITUA_PELO_SHA256_DA_SUA_CHAVE` por esse valor, e faça commit.
+
+> Observação: se o PWA Builder também forneceu um `assetlinks.json` pronto no pacote
+> do app, você pode usar o conteúdo dele diretamente — já vem com o SHA-256 correto.
+
+### Confira o package name
+
+O `package_name` no arquivo deve ser exatamente o mesmo do app:
+`br.com.wesleypeixoto.rugosidade`
+
+---
+
+## Nota sobre GitHub Pages e subpasta
+
+Como o site fica em uma subpasta (`/rugosidade-eixos/`), todos os caminhos do
+projeto são **relativos** (`./arquivo`) para funcionar corretamente. Não use
+caminhos que comecem com `/` (barra), pois apontariam para a raiz do domínio.
