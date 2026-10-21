@@ -695,17 +695,13 @@ footer b{color:var(--ice)}
  <div class="card"><h3>🧭 Orientação da medição</h3><p>Medir <b>perpendicular</b> às marcas de usinagem, na direção de maior rugosidade. No came, seguir a especificação de posição angular.</p></div>
  </div>
 
- <h3 style="font-size:18px;margin-bottom:8px">🔬 Simulador de leitura — Ra / Rz</h3>
+ <h3 style="font-size:18px;margin-bottom:8px">🔬 Simulador de leitura — Wt / Rz</h3>
  <p class="sub" style="margin-bottom:20px">Ajuste a condição da superfície e veja o perfil e os parâmetros mudarem. Compare contra a meta de exemplo.</p>
  <div class="sim card">
  <div class="sim-controls">
  <div class="ctrl">
- <label>Amplitude dos picos (Rpk relativo) <span class="rv" id="vAmp">média</span></label>
- <input type="range" id="amp" min="1" max="10" value="4" oninput="updateSim()">
- </div>
- <div class="ctrl">
- <label>Frequência das marcas (avanço) <span class="rv" id="vFreq">média</span></label>
- <input type="range" id="freq" min="2" max="14" value="7" oninput="updateSim()">
+ <label>Avanço de dressagem (Rz) <span class="rv" id="vFreq">médio</span></label>
+ <input type="range" id="freq" min="1" max="10" value="4" oninput="updateSim()">
  </div>
  <div class="ctrl">
  <label>Ondulação (Wt) <span class="rv" id="vWav">baixa</span></label>
@@ -1021,27 +1017,30 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 /* ===== SIMULATOR ===== */
 function lvl(v,a,b){return v<a?'baixa':v>b?'alta':'média';}
 function updateSim(){
- const amp=+amp_.value, freq=+freq_.value, wav=+wav_.value;
- vAmp.textContent=lvl(amp,3,7); vFreq.textContent=lvl(freq,5,10); vWav.textContent=lvl(wav,3,7);
- // build profile path
+ const dress=+freq_.value, wav=+wav_.value;
+ // Avanço de dressagem: quanto maior, mais agressivo o gume do rebolo → sulcos mais profundos → Rz maior
+ vFreq.textContent=(dress<4?'baixo':dress>7?'alto':'médio'); vWav.textContent=lvl(wav,3,7);
+ // build profile path — a profundidade dos sulcos cresce com o avanço de dressagem
  const W=420,mid=90,pts=[];
+ const depth=dress*2.4;           // amplitude dos sulcos de retífica proporcional ao avanço de dressagem
+ const pitch=10;                  // passo fixo das marcas de retífica
  for(let x=0;x<=W;x+=4){
- const rough=Math.sin(x/(16-freq)*1.3)*amp*2.2 + (Math.random()-.5)*amp*0.9;
+ const rough=Math.sin(x/pitch*1.3)*depth + (Math.random()-.5)*dress*0.8;
  const wave=Math.sin(x/120)*wav*3.2;
  pts.push([x, mid - rough - wave]);
  }
  let d='M'+pts.map(p=>p[0]+' '+p[1].toFixed(1)).join(' L');
  document.getElementById('profPath').setAttribute('d',d);
- // pseudo metrics (didactic)
- const ra=(amp*0.42+wav*0.05).toFixed(2);
- const rz=(amp*1.05+wav*0.1).toFixed(2);
+ // pseudo metrics (didactic) — Rz dirigido pelo avanço de dressagem
+ const rz=(dress*1.15+wav*0.1).toFixed(2);
+ const ra=(dress*0.46+wav*0.05).toFixed(2);
  const wt=(wav*0.9+0.3).toFixed(2);
  oRa.textContent=ra; oRz.textContent=rz; oWt.textContent=wt;
  const v=document.getElementById('verdict');
  if(rz<3 && wt<2.5){v.className='verdict ok';v.textContent='✓ Dentro da meta de exemplo (Rz baixo, Wt controlado) — superfície adequada para plateau.';}
- else{v.className='verdict bad';v.textContent='✗ Fora da meta de exemplo: '+(rz>=3?'Rz alto → revisar retífica/dressagem. ':'')+(wt>=2.5?'Wt alto → vibração/desalinhamento (NVH).':'');}
+ else{v.className='verdict bad';v.textContent='✗ Fora da meta de exemplo: '+(rz>=3?'Rz alto → reduzir o avanço de dressagem / revisar retífica. ':'')+(wt>=2.5?'Wt alto → vibração/desalinhamento (NVH).':'');}
 }
-const amp_=document.getElementById('amp'),freq_=document.getElementById('freq'),wav_=document.getElementById('wav');
+const freq_=document.getElementById('freq'),wav_=document.getElementById('wav');
 updateSim();
 
 /* ===== DEFECTS ===== */
