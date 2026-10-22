@@ -1119,9 +1119,9 @@ function updateSim(){
  if(rzOk && wtOk){v.className='verdict ok';v.textContent='✓ Aprovado (retífica): Rz dentro de 2,0–4,0 µm e Wt ≤ 1,0 µm.';}
  else{
    let m=[];
-   if(!rzOk) m.push(rz<2.0?'Rz baixo (<2,0) → base lisa demais, reduzir remoção/avanço fino em excesso.':'Rz alto (>4,0) → reduzir o avanço de dressagem / revisar retífica.');
-   if(!wtOk) m.push('Wt alto (>1,0) → vibração/desalinhamento (NVH).');
-   v.className='verdict bad';v.textContent='✗ Reprovado (retífica): '+m.join(' ');
+   if(!rzOk) m.push(rz<2.0?'Rz baixo (<2,0) → superfície lisa demais → reduzir avanço de dressagem (RETÍFICA).':'Rz alto (>4,0) → reduzir o avanço de dressagem (RETÍFICA).');
+   if(!wtOk) m.push('Wt alto (>1,0) → ondulação → verificar geometria, vibração, fixação (RETÍFICA).');
+   v.className='verdict bad';v.textContent='✗ Reprovado: '+m.join(' ');
  }
 }
 const freq_=document.getElementById('freq'),wav_=document.getElementById('wav');
@@ -1158,11 +1158,11 @@ function updatePol(){
  if(okRpk&&okRk&&okRvk&&okWt){v.className='verdict ok';v.textContent='✓ Aprovado (polimento): plateau dentro de todas as tolerâncias — bom suporte de carga e retenção de óleo.';}
  else{
    let m=[];
-   if(!okRpk) m.push('Rpk alto (>0,050) → picos não removidos; aumentar pressão/passes da fita.');
-   if(!okRk)  m.push('Rk alto (>0,200) → núcleo profundo; revisar retífica/acabamento.');
-   if(!okRvk) m.push('Rvk baixo (<0,100) → vales apagados; reduzir força/tempo de polimento.');
-   if(!okWt)  m.push('Wt alto (>0,300) → ondulação; verificar vibração/fixação.');
-   v.className='verdict bad';v.textContent='✗ Reprovado (polimento): '+m.join(' ');
+   if(!okRpk) m.push('Rpk alto (>0,050) → picos não removidos → aumentar pressão/tempo de lixa (POLITRIZ).');
+   if(!okRk)  m.push('Rk alto (>0,200) → núcleo profundo → revisar acabamento - avanço de dressagem (RETÍFICA).');
+   if(!okRvk) m.push('Rvk baixo (<0,100) → vales apagados → reduzir pressão/tempo de lixa (POLITRIZ).');
+   if(!okWt)  m.push('Wt alto (>0,300) → ondulação → verificar geometria, vibração, fixação (RETÍFICA).');
+   v.className='verdict bad';v.textContent='✗ Reprovado: '+m.join(' ');
  }
 }
 
