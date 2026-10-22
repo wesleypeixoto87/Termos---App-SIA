@@ -7,7 +7,9 @@
 <meta name="copyright" content="© 2026 Wesley Peixoto. Todos os direitos reservados.">
 <meta name="description" content="Treinamento técnico em rugosidade e acabamento superficial de eixos comando. Autoria: Wesley Peixoto.">
 <title>Rugosidade & Acabamento Superficial · Eixos Comando</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' rx='14' fill='%230d1b2a'/%3E%3Cpolygon points='36,10 60,23 60,49 36,62 12,49 12,23' fill='none' stroke='%2321c08b' stroke-width='4'/%3E%3Cpath d='M27 29 q22 2 10 14 q-12 7 10 14' fill='none' stroke='%23eef4f9' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="favicon.ico?v=3" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=3">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=3">
 <style>
 :root{
  --navy:#0d1b2a; --navy-2:#13263a; --graphite:#1f2933; --graphite-2:#2b3947;
@@ -30,8 +32,9 @@ header.top{position:fixed;top:0;left:0;right:0;height:60px;z-index:100;
  background:rgba(13,27,42,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
  display:flex;align-items:center;gap:18px;padding:0 22px}
 .brand{display:flex;align-items:center;gap:11px;font-weight:700;font-size:15px;white-space:nowrap}
-.brand .logo{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--green),var(--blue));
- display:grid;place-items:center;font-size:18px}
+.brand .logo{width:34px;height:34px;border-radius:9px;overflow:hidden;
+ display:grid;place-items:center}
+.brand .logo img{width:100%;height:100%;object-fit:cover;display:block}
 .brand small{display:block;font-size:10.5px;color:var(--mute);font-weight:500;letter-spacing:.06em}
 nav.menu{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
 nav.menu a{font-size:13px;padding:7px 11px;border-radius:8px;color:var(--ice);transition:.18s;white-space:nowrap}
@@ -439,12 +442,12 @@ footer b{color:var(--ice)}
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Rugosidade Eixos">
-<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
 </head>
 <body>
 <header class="top">
  <div class="brand">
- <div class="logo"><svg viewBox="0 0 72 72" width="22" height="22" xmlns="http://www.w3.org/2000/svg" aria-label="SIA"><polygon points="36,7 61,21 61,51 36,65 11,51 11,21" fill="none" stroke="#ffffff" stroke-width="4"/><path d="M27 28 q22 2 10 14 q-12 7 10 14" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/></svg></div>
+ <div class="logo"><img src="logo.png?v=3" alt="SIA" width="34" height="34"></div>
  <div>Surface Intelligence Academy (SIA)<small>LDETP · Camshaft Machining Engineering</small></div>
  </div>
  <nav class="menu" id="menu">
@@ -482,7 +485,7 @@ footer b{color:var(--ice)}
  </div>
  <div class="bcell" onclick="go('#aplicacao')"><div class="big" style="color:var(--green)">↓40%</div><p>Redução de atrito · plateau</p></div>
  <div class="bcell" onclick="go('#plateau')"><div class="big" style="color:var(--blue)">&lt;1µm</div><p>Meta Rpk pós-polimento</p></div>
- <div class="bcell wide" onclick="go('#metrologia')"><div class="bi">◎</div><div><h4>Simulador Ra / Rz</h4><p>Painel interativo de leitura e inspeção</p></div><span class="badge">interativo</span></div>
+ <div class="bcell wide" onclick="go('#metrologia')"><div class="bi">◎</div><div><h4>Simulador Wt / Rz</h4><p>Painel interativo de leitura e inspeção</p></div><span class="badge">interativo</span></div>
  <div class="bcell" onclick="go('#conceitos')"><div class="bi">◧</div><div><h4>Conceitos</h4><p>Rugosidade × ondulação</p></div></div>
  <div class="bcell" onclick="go('#parametros')"><div class="bi">▤</div><div><h4>Parâmetros</h4><p>Rz · Rk · Rpk · Rvk · Wt</p></div></div>
  <div class="bcell wide" onclick="go('#defeitos')"><div class="bi">⚠</div><div><h4>Diagnóstico de Defeitos</h4><p>Causa · impacto · ação corretiva</p></div></div>
@@ -696,7 +699,14 @@ footer b{color:var(--ice)}
  </div>
 
  <h3 style="font-size:18px;margin-bottom:8px">🔬 Simulador de leitura — Wt / Rz</h3>
- <p class="sub" style="margin-bottom:20px">Ajuste a condição da superfície e veja o perfil e os parâmetros mudarem. Compare contra a meta de exemplo.</p>
+ <p class="sub" style="margin-bottom:16px">Escolha a fase, ajuste a condição da superfície e veja o perfil e os parâmetros mudarem. O veredito compara com as tolerâncias de aprovação.</p>
+ <div class="filters" style="margin-bottom:16px">
+ <div class="f active" id="tabRet" onclick="simTab('ret')">⚙️ Retífica</div>
+ <div class="f" id="tabPol" onclick="simTab('pol')">✨ Polimento</div>
+ </div>
+
+ <!-- ===== SIMULADOR RETÍFICA ===== -->
+ <div id="simRet">
  <div class="sim card">
  <div class="sim-controls">
  <div class="ctrl">
@@ -707,12 +717,12 @@ footer b{color:var(--ice)}
  <label>Ondulação (Wt) <span class="rv" id="vWav">baixa</span></label>
  <input type="range" id="wav" min="0" max="10" value="2" oninput="updateSim()">
  </div>
- <div class="readout">
- <div class="ro"><div class="rk">Ra</div><div class="rval" id="oRa">—</div><div class="rk">µm</div></div>
+ <div class="readout" style="grid-template-columns:repeat(2,1fr)">
  <div class="ro"><div class="rk">Rz</div><div class="rval" id="oRz">—</div><div class="rk">µm</div></div>
  <div class="ro"><div class="rk">Wt</div><div class="rval" id="oWt">—</div><div class="rk">µm</div></div>
  </div>
  <div class="verdict" id="verdict">—</div>
+ <div class="example" style="margin-top:14px"><b>Aprovação (retífica):</b> Rz entre 2,0 e 4,0 µm · Wt ≤ 1,0 µm.</div>
  </div>
  <div>
  <div class="figbox" style="padding:14px">
@@ -721,6 +731,48 @@ footer b{color:var(--ice)}
  <path id="profPath" d="" fill="none" stroke="#21c08b" stroke-width="2"/>
  </svg>
  <div class="caption">Perfil de rugosidade simulado (linha tracejada = linha média)</div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ===== SIMULADOR POLIMENTO ===== -->
+ <div id="simPol" style="display:none">
+ <div class="sim card">
+ <div class="sim-controls">
+ <div class="ctrl">
+ <label>Rpk — picos reduzidos <span class="rv" id="pRpk">0,040</span></label>
+ <input type="range" id="sRpk" min="0" max="100" value="27" oninput="updatePol()">
+ </div>
+ <div class="ctrl">
+ <label>Rk — núcleo <span class="rv" id="pRk">0,150</span></label>
+ <input type="range" id="sRk" min="0" max="100" value="38" oninput="updatePol()">
+ </div>
+ <div class="ctrl">
+ <label>Rvk — vales (reserva de óleo) <span class="rv" id="pRvk">0,140</span></label>
+ <input type="range" id="sRvk" min="0" max="100" value="40" oninput="updatePol()">
+ </div>
+ <div class="ctrl">
+ <label>Wt — ondulação <span class="rv" id="pWt">0,200</span></label>
+ <input type="range" id="sWt" min="0" max="100" value="40" oninput="updatePol()">
+ </div>
+ <div class="readout" style="grid-template-columns:repeat(2,1fr)">
+ <div class="ro"><div class="rk">Rpk</div><div class="rval" id="oRpk">—</div><div class="rk">µm</div></div>
+ <div class="ro"><div class="rk">Rk</div><div class="rval" id="oRk">—</div><div class="rk">µm</div></div>
+ <div class="ro"><div class="rk">Rvk</div><div class="rval" id="oRvk">—</div><div class="rk">µm</div></div>
+ <div class="ro"><div class="rk">Wt</div><div class="rval" id="oWtP">—</div><div class="rk">µm</div></div>
+ </div>
+ <div class="verdict" id="verdictP">—</div>
+ <div class="example" style="margin-top:14px"><b>Aprovação (polimento):</b> Rpk ≤ 0,050 · Rk ≤ 0,200 · Rvk ≥ 0,100 · Wt ≤ 0,300 µm. <i>Considera o acabamento da retífica já aprovado.</i></div>
+ </div>
+ <div>
+ <div class="figbox" style="padding:14px">
+ <svg viewBox="0 0 420 180" xmlns="http://www.w3.org/2000/svg" id="polSvg">
+ <line x1="0" y1="70" x2="420" y2="70" stroke="#3d7dca" stroke-dasharray="5 5" stroke-width="1"/>
+ <path id="polPath" d="" fill="none" stroke="#21c08b" stroke-width="2"/>
+ </svg>
+ <div class="caption">Perfil de plateau simulado — picos (Rpk), núcleo (Rk) e vales (Rvk)</div>
+ </div>
  </div>
  </div>
  </div>
@@ -909,6 +961,34 @@ footer b{color:var(--ice)}
  <h2 class="title">Troubleshooting de Acabamento Superficial</h2>
  <p class="sub">Ferramenta de diagnóstico guiado para quando Wt, Rz, Rk, Rpk ou Rvk saem da tolerância. A sequência segue <b>prioridade de investigação</b> — da máquina ao sistema de medição — evitando ações aleatórias.</p>
 
+  <!-- REFERÊNCIA DE APROVAÇÃO POR FASE -->
+  <div class="grid-2" style="margin:4px 0 24px">
+   <div class="card" style="border-color:rgba(61,125,202,.35)">
+    <h3>⚙️ Retífica — tolerâncias de aprovação</h3>
+    <div class="tablewrap" style="margin-top:12px">
+     <table>
+      <tr><th>Parâmetro</th><th>Critério</th></tr>
+      <tr><td class="mono">Rz</td><td>2,0 – 4,0 µm</td></tr>
+      <tr><td class="mono">Wt</td><td>≤ 1,0 µm</td></tr>
+     </table>
+    </div>
+   </div>
+   <div class="card" style="border-color:rgba(33,192,139,.35)">
+    <h3>✨ Polimento — tolerâncias de aprovação</h3>
+    <div class="tablewrap" style="margin-top:12px">
+     <table>
+      <tr><th>Parâmetro</th><th>Critério</th></tr>
+      <tr><td class="mono">Rpk</td><td>≤ 0,050 µm</td></tr>
+      <tr><td class="mono">Rk</td><td>≤ 0,200 µm</td></tr>
+      <tr><td class="mono">Rvk</td><td>≥ 0,100 µm</td></tr>
+      <tr><td class="mono">Wt</td><td>≤ 0,300 µm</td></tr>
+     </table>
+    </div>
+    <div class="example" style="margin-top:12px"><b>Obs.:</b> as tratativas de polimento consideram o <b>acabamento da retífica já aprovado</b>. Se a retífica estiver fora, corrija-a primeiro.</div>
+   </div>
+  </div>
+
+
  <div class="ts" id="ts">
 
   <!-- BUSCA + CONTROLES -->
@@ -1018,12 +1098,11 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 function lvl(v,a,b){return v<a?'baixa':v>b?'alta':'média';}
 function updateSim(){
  const dress=+freq_.value, wav=+wav_.value;
- // Avanço de dressagem: quanto maior, mais agressivo o gume do rebolo → sulcos mais profundos → Rz maior
+ // Avanço de dressagem: quanto maior, mais agressivo o gume do rebolo -> sulcos mais profundos -> Rz maior
  vFreq.textContent=(dress<4?'baixo':dress>7?'alto':'médio'); vWav.textContent=lvl(wav,3,7);
- // build profile path — a profundidade dos sulcos cresce com o avanço de dressagem
  const W=420,mid=90,pts=[];
- const depth=dress*2.4;           // amplitude dos sulcos de retífica proporcional ao avanço de dressagem
- const pitch=10;                  // passo fixo das marcas de retífica
+ const depth=dress*2.4;
+ const pitch=10;
  for(let x=0;x<=W;x+=4){
  const rough=Math.sin(x/pitch*1.3)*depth + (Math.random()-.5)*dress*0.8;
  const wave=Math.sin(x/120)*wav*3.2;
@@ -1031,16 +1110,72 @@ function updateSim(){
  }
  let d='M'+pts.map(p=>p[0]+' '+p[1].toFixed(1)).join(' L');
  document.getElementById('profPath').setAttribute('d',d);
- // pseudo metrics (didactic) — Rz dirigido pelo avanço de dressagem
- const rz=(dress*1.15+wav*0.1).toFixed(2);
- const ra=(dress*0.46+wav*0.05).toFixed(2);
- const wt=(wav*0.9+0.3).toFixed(2);
- oRa.textContent=ra; oRz.textContent=rz; oWt.textContent=wt;
+ // Rz dirigido pelo avanço de dressagem; Wt pela ondulação
+ const rz=(dress*0.44+0.6+wav*0.05);
+ const wt=(wav*0.12+0.1);
+ oRz.textContent=rz.toFixed(2); oWt.textContent=wt.toFixed(2);
  const v=document.getElementById('verdict');
- if(rz<3 && wt<2.5){v.className='verdict ok';v.textContent='✓ Dentro da meta de exemplo (Rz baixo, Wt controlado) — superfície adequada para plateau.';}
- else{v.className='verdict bad';v.textContent='✗ Fora da meta de exemplo: '+(rz>=3?'Rz alto → reduzir o avanço de dressagem / revisar retífica. ':'')+(wt>=2.5?'Wt alto → vibração/desalinhamento (NVH).':'');}
+ const rzOk=(rz>=2.0 && rz<=4.0), wtOk=(wt<=1.0);
+ if(rzOk && wtOk){v.className='verdict ok';v.textContent='✓ Aprovado (retífica): Rz dentro de 2,0–4,0 µm e Wt ≤ 1,0 µm.';}
+ else{
+   let m=[];
+   if(!rzOk) m.push(rz<2.0?'Rz baixo (<2,0) → base lisa demais, reduzir remoção/avanço fino em excesso.':'Rz alto (>4,0) → reduzir o avanço de dressagem / revisar retífica.');
+   if(!wtOk) m.push('Wt alto (>1,0) → vibração/desalinhamento (NVH).');
+   v.className='verdict bad';v.textContent='✗ Reprovado (retífica): '+m.join(' ');
+ }
 }
 const freq_=document.getElementById('freq'),wav_=document.getElementById('wav');
+
+/* ===== SIMULADOR POLIMENTO ===== */
+// sliders 0..100 mapeados para faixas físicas de cada parâmetro de plateau
+function mapRange(v,min,max){ return min + (v/100)*(max-min); }
+function updatePol(){
+ const rpk=mapRange(+document.getElementById('sRpk').value, 0.010, 0.120);
+ const rk =mapRange(+document.getElementById('sRk').value,  0.060, 0.400);
+ const rvk=mapRange(+document.getElementById('sRvk').value, 0.030, 0.260);
+ const wt =mapRange(+document.getElementById('sWt').value,  0.050, 0.600);
+ const f=n=>n.toFixed(3).replace('.',',');
+ document.getElementById('pRpk').textContent=f(rpk);
+ document.getElementById('pRk').textContent=f(rk);
+ document.getElementById('pRvk').textContent=f(rvk);
+ document.getElementById('pWt').textContent=f(wt);
+ document.getElementById('oRpk').textContent=rpk.toFixed(3);
+ document.getElementById('oRk').textContent=rk.toFixed(3);
+ document.getElementById('oRvk').textContent=rvk.toFixed(3);
+ document.getElementById('oWtP').textContent=wt.toFixed(3);
+ // desenha perfil de plateau: picos curtos (Rpk), núcleo (Rk), vales profundos (Rvk)
+ const W=420,base=70,pts=[];
+ for(let x=0;x<=W;x+=3){
+ const t=x/W*Math.PI*14;
+ const peak=Math.max(0,Math.sin(t))*rpk*180;       // picos acima
+ const valley=Math.max(0,-Math.sin(t*1.1))*rvk*160; // vales abaixo
+ const core=Math.sin(x/40)*rk*60;
+ pts.push([x, base - peak + valley + core*0.2]);
+ }
+ document.getElementById('polPath').setAttribute('d','M'+pts.map(p=>p[0]+' '+p[1].toFixed(1)).join(' L'));
+ const v=document.getElementById('verdictP');
+ const okRpk=rpk<=0.050, okRk=rk<=0.200, okRvk=rvk>=0.100, okWt=wt<=0.300;
+ if(okRpk&&okRk&&okRvk&&okWt){v.className='verdict ok';v.textContent='✓ Aprovado (polimento): plateau dentro de todas as tolerâncias — bom suporte de carga e retenção de óleo.';}
+ else{
+   let m=[];
+   if(!okRpk) m.push('Rpk alto (>0,050) → picos não removidos; aumentar pressão/passes da fita.');
+   if(!okRk)  m.push('Rk alto (>0,200) → núcleo profundo; revisar retífica/acabamento.');
+   if(!okRvk) m.push('Rvk baixo (<0,100) → vales apagados; reduzir força/tempo de polimento.');
+   if(!okWt)  m.push('Wt alto (>0,300) → ondulação; verificar vibração/fixação.');
+   v.className='verdict bad';v.textContent='✗ Reprovado (polimento): '+m.join(' ');
+ }
+}
+
+/* ===== ABAS DO SIMULADOR ===== */
+function simTab(which){
+ const isRet=which==='ret';
+ document.getElementById('simRet').style.display=isRet?'':'none';
+ document.getElementById('simPol').style.display=isRet?'none':'';
+ document.getElementById('tabRet').classList.toggle('active',isRet);
+ document.getElementById('tabPol').classList.toggle('active',!isRet);
+ if(isRet){updateSim();}else{updatePol();}
+}
+
 updateSim();
 
 /* ===== DEFECTS ===== */
